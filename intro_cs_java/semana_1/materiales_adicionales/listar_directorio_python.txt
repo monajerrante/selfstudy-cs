@@ -1,0 +1,177 @@
+https://j2logo.com/python/listar-directorio-en-python/
+
+Listar directorio en Python.
+Listar ficheros de un directorio
+
+    Categoría: Tutoriales Python
+    básico, Desayuno con Python, directorios, ficheros, python 
+
+    Listar directorio en Python
+    
+    En este tutorial te voy a explicar varias formas de listar
+    un directorio en Python para obtener los nombres de todos
+    sus archivos y carpetas.
+    
+    Para el tutorial, vamos a suponer un directorio de ejemplo
+    cuyo contenido es el siguiente:
+    
+            + ejemplo
+            |_ + dir_a
+                 |_ fichero2.txt
+                 |_ fichero3.txt
+            |_ + dir_b
+                 |_ fichero4.txt
+            |_ documento.txt
+            |_ fichero1.txt
+            |_ imagen.jpg
+    
+    Índice
+    
+        Listar directorio en Python con listdir()
+        Recorrer directorio en Python con scandir()
+        Listar ficheros de un directorio con iterdir()
+        Métodos recomendados
+        Ejemplos
+    
+    Listar directorio en Python con listdir()
+    
+    Para listar o recorrer un directorio en Python basta con usar
+    la función listdir() del módulo os. Esta función recibe como
+    argumento una ruta del sistema de ficheros y devuelve una lista
+    con los nombres de los archivos y carpetas que contiene.
+    Si no se pasa ningún argumento, el directorio de referencia es
+    la carpeta actual.
+    
+        >>> import os
+        >>> contenido = os.listdir('/Users/Juanjo/ejemplo')
+        >>> contenido
+        ['documento.txt', 'imagen.jpg', 'dir_b', 'fichero1.txt', 'dir_a']
+    
+    El problema de usar la función listdir() es que no permite
+    distinguir si los objetos listados son ficheros o directorios.
+    Para ello, debemos usar otras funciones como isfile() o isdir()
+    del módulo os.path. Por ejemplo, para mostrar los archivos que son
+    de tipo jpg deberías hacer algo como lo siguiente:
+    
+        import os
+        ejemplo_dir = '/Users/Juanjo/ejemplo/'
+        contenido = os.listdir(ejemplo_dir)
+        imagenes = []
+        for fichero in contenido:
+            if os.path.isfile(os.path.join(ejemplo_dir, fichero))
+                                          and fichero.endswith('.jpg'):
+                imagenes.append(fichero)
+        print(imagenes)
+    
+   
+    Recorrer directorio en Python con scandir()
+    
+    Si debes filtrar de algún modo los elementos devueltos por listdir(),
+    la mejor forma de recorrer un directorio en Python es usar la función
+    scandir(), contenida también en el módulo os.
+    
+    NOTA: La función fue añadida en la versión 3.5 de Python.
+          Actualmente, es la forma recomendada por el propio
+          Python para recorrer un directorio.
+    
+    Esta función actúa realmente como un iterador en lugar de devolver
+    una lista. Además, no solo recupera los nombres de fichero sino que
+    devuelve objetos de tipo DirEntry que, además del nombre, contienen
+    otros atributos que indican si el objeto es un fichero, un directorio,
+    su número inode o su ruta completa.
+    
+    Veamos un ejemplo de uso de scandir() para listar los ficheros
+    de un directorio en Python (el directorio del ejemplo):
+    
+        import os
+        ejemplo_dir = '/Users/Juanjo/ejemplo/'
+        with os.scandir(ejemplo_dir) as ficheros:
+            for fichero in ficheros:
+                print(fichero.name)
+        
+    
+    Como has podido comprobar, scandir() se utiliza en combinación
+    con la sentencia with ya que soporta manejadores de contexto.
+    Al ejecutar scandir() junto con with, se cierra el iterador y
+    se liberan todos los recursos utilizados por este una vez finaliza.
+    
+    
+    Listar ficheros de un directorio con iterdir()
+    
+    Otro módulo Python que ofrece funcionalidad para iterar sobre
+    un directorio y recorrer su contenido es pathlib. Este módulo
+    ofrece una serie de objetos y recursos que permiten realizar
+    la mayoría de operaciones comunes sobre ficheros y directorios
+    de forma fácil y eficiente.
+    
+    Para listar un directorio con pathlib hay que crear un objeto Path
+    que, en función del sistema operativo en que nos encontremos, será
+    realmente de tipo PosixPath o WindowsPath.
+    
+    Estos objetos Path tienen un método llamado iterdir() que crea
+    un iterador que recorre todos los archivos y carpetas de
+    un directorio. Además, los objetos de clase Path contienen
+    propiedades como name, con el nombre del fichero, y métodos como
+    is_file() o is_dir(), que permiten comprobar si un fichero es
+    un archivo o un directorio.
+    
+    Veamos a continuación un ejemplo de uso de pathlib:
+    
+        import pathlib
+        ejemplo_dir = '/Users/Juanjo/ejemplo/'
+        directorio = pathlib.Path(ejemplo_dir)
+        for fichero in directorio.iterdir():
+            print(fichero.name)
+        
+     
+    Métodos recomendados
+    
+    Una vez que hemos visto tres formas diferentes para recorrer
+    un directorio en Python, te diré que las opciones recomendadas son,
+    bien utilizar la función scandir(), bien usar el método iterdir()
+    de pathlib.
+    Ejemplos
+    
+    A partir de aquí veremos cómo aplicar filtros para recorrer solo
+    los ficheros, solo determinados ficheros o solo los subdirectorios
+    de un directorio dado.
+    
+    
+    Recorrer los ficheros de un directorio con scandir
+    
+        import os
+        ejemplo_dir = '/Users/Juanjo/ejemplo/'
+        with os.scandir(ejemplo_dir) as ficheros:
+            ficheros = [fichero.name for fichero in ficheros if fichero.is_file()]
+        print(ficheros)
+        
+    Para recorrer solo los ficheros de tipo jpg, se puede añadir
+    una condición más:
+    
+        with os.scandir(ejemplo_dir) as ficheros:
+            ficheros = [fichero.name for fichero in ficheros if fichero.is_file()
+                        and fichero.name.endswith('.jpg')]
+    
+    Recorrer los ficheros de un directorio con iterdir
+    
+        import pathlib
+        ejemplo_dir = '/Users/Juanjo/ejemplo/'
+        directorio = pathlib.Path(ejemplo_dir)
+        ficheros = [fichero.name for fichero in directorio.iterdir()
+                    if fichero.is_file()]
+    
+    Listar los subdirectorios de un directorio con scandir
+    
+        import os
+        ejemplo_dir = '/Users/Juanjo/ejemplo/'
+        with os.scandir(ejemplo_dir) as ficheros:
+            subdirectorios = [fichero.name for fichero in ficheros if fichero.is_dir()]
+        print(subdirectorios)
+        
+     
+    Listar los subdirectorios de un directorio con iterdir
+        import pathlib
+        ejemplo_dir = '/Users/Juanjo/ejemplo/'
+        directorio = pathlib.Path(ejemplo_dir)
+        ficheros = [fichero.name for fichero in directorio.iterdir()
+                    if fichero.is_dir()]

@@ -1,0 +1,60 @@
+Python – Crear archivo ZIP
+
+    En este ejemplo veremos como crear un archivo ZIP con Python,
+    comprimiremos cuatro archivos de texto, pero se puede hacer
+    el ejemplo con cualquier tipo y cantidad de archivos o ficheros:
+    
+    En nuestro código importamos el paquete zipfile.
+    
+    import zipfile
+    try:
+        import zlib
+        compression = zipfile.ZIP_DEFLATED
+    except:
+        compression = zipfile.ZIP_STORED
+    
+    zf = zipfile.ZipFile("/home/decodigo/Documentos/python/archivos/archivo_ejemplo.zip", mode="w")
+    try:
+        zf.write("/home/decodigo/Documentos/python/archivos/archivo1.txt", compress_type=compression)
+        zf.write("/home/decodigo/Documentos/python/archivos/archivo2.txt", compress_type=compression)
+        zf.write("/home/decodigo/Documentos/python/archivos/archivo3.txt", compress_type=compression)
+        zf.write("/home/decodigo/Documentos/python/archivos/archivo4.txt", compress_type=compression)
+    finally:
+        zf.close()
+        
+    Las líneas de código que debes modificar son las siguientes:
+    
+    1. Primero debes especificar que el archivo estará comprimido,
+       importando el módulo zlib y definiendo el tipo de almacenamiento
+       en el ZIP, usando
+    
+            compression = zipfile.ZIP_DEFLATED.
+    
+    2. Debes hacerlo dentro de una sentencia try except ya que este paso
+       puede generar un error en cuyo caso cambiará el tipo de compresión.
+    
+            try:
+                import zlib
+                compression = zipfile.ZIP_DEFLATED
+            except:
+                compression = zipfile.ZIP_STORED
+            
+    3. Después creamos el archivo ZIP de ejemplo.
+    
+            zf = zipfile.ZipFile("/home/decodigo/Documentos/python/archivos/archivo_ejemplo.zip", mode="w")
+    
+    4. A cada archivo lo agregamos usando la función write.
+    
+            zf.write("/home/decodigo/Documentos/python/archivos/archivo1.txt", compress_type=compression)
+            zf.write("/home/decodigo/Documentos/python/archivos/archivo2.txt", compress_type=compression)
+            zf.write("/home/decodigo/Documentos/python/archivos/archivo3.txt", compress_type=compression)
+            zf.write("/home/decodigo/Documentos/python/archivos/archivo4.txt", compress_type=compression)
+            
+    
+    El archivo archivo_ejemplo.zip, contendrá los archivos que 
+    especificamos en código: archivo1.txt, archivo2.txt, archivo3.txt
+    y archivo4.txt.
+    
+    Y ya está, se trata de un ejemplo de crear un archivo ZIP
+    sencillo que esperamos te sea de utilidad.
+    

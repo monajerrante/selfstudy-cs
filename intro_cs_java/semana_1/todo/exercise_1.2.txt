@@ -1,0 +1,21 @@
+Explain how to use Quadratic.java to find the square root of a number.
+
+Solution: to find the square root of c, find the roots of x^2 + 0x - c.
+
+A physics student gets unexpected results when using the code
+
+    double force = G * mass1 * mass2 / r * r; 
+
+to compute values according to the formula F = Gm1m2 / r2. Explain the problem and correct the code.
+
+Solution: It divides by r, then multiplies by r (instead of dividing by r *r). Use parentheses:
+
+    double force = G * mass1 * mass2 / (r * r);
+
+Write a program Distance.java that takes two integer command-line arguments x and y and prints the Euclidean distance from the point (x, y) to the origin (0, 0).
+
+Write a program SumOfTwoDice.java that prints the sum of two random integers between 1 and 6 (such as you might get when rolling dice).
+
+Write a program SumOfSines.java that takes a double command-line argument t (in degrees) and prints the value of sin(2t) + sin(3t).
+
+Write a program SpringSeason.java that takes two int values m and d from the command line and prints true if day d of month m is between March 20 (m = 3, d =20) and June 20 (m = 6, d = 20), false otherwise. 

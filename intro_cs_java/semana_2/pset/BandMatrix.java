@@ -3,7 +3,7 @@
  * 
  * Course: Computer Science: Programming with a Purpose
  * 
- * Tarea de programacion: 01 Band matrices.
+ * Tarea de programacion: 02 Band matrices.
  *    Write a program BandMatrix.java that takes two integer
  *    command-line arguments n and width and prints an n-by-n
  *    pattern like the ones below, with a zero (0) for each

@@ -1,0 +1,6 @@
+How to Convert PDF to HTML using Python
+
+If you're working on a Linux machine, the Python PDF to HTML method works well because you very likely have the tools installed already. For example, if you're using AbiWord, you can either use the command-line method or invoke the GUI. In the former scenario, you can use standard libraries to invoke the program from Python, as shown in the image below:
+pdf to html python
+
+The actual conversion command - "abiword -t %(tmp)s/%(guid)s.html %(file_path)s; cat %(tmp)s/%(guid)s.html" - can be seen in the image above.

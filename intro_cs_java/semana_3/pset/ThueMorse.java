@@ -42,25 +42,50 @@
 
 public class ThueMorse {
     public static void main( String[] argv ){
-        int size = Integer.parseint(argv[0]);
-        int[] str = new int[size*2;
-        while ( str.length < size ) {
-            for (int i = 0; i < str.length; i++) {
-                if (str[i] == ) {
-                    str +=  
-        }
-        ver = gen_str(size, '0')
-        for i in ver:
-            print(gen_str(size, i))
+        int size = Integer.parseInt(argv[0]);  // El tamaño de la matriz
+        int[][] matrice = new int[size][size]; // Crea la matriz
         
-        def gen_str(n, res):
-          #res = '0'
-          while len(res) < n:
-            for i in res:
-              if i == '0':
-                res += '1'
-              elif i == '1':
-                res += '0'
-          return res[:n]
+        int[] line = new int[size]; // Crea la cadena horizontal y vertical
+        line[0] = 0;                // con el primer elemento puesto a cero 
+        
+        matrice[0][0] = 0; // No hace falta pero ¿porque no?
+        
+        // Genera cadena horizontal/vertical  
+        int i = 1;
+        int j = 0;
+        
+        while ( i < matrice[0].length ) {
+            for ( j = 0; j < i; j++) {
+                if (j+i == matrice[0].length) break;
+                if (matrice[0][j] == 0) matrice[0][j+i] = 1;
+                else           matrice[0][j+i] = 0;
+            }
+            i = i+j;
+            //System.out.println(j + " " + i);
+        }
+        /*
+        for (i = 0; i < matrice[0].length; i++) {
+            System.out.print(matrice[0][i]);
+        }
+       */
+        for (int k = 0; k < size; k++) {
+            i = 1;
+            while( i < size) {
+                for ( j = 0; j < i; j++) {
+                    if (j+i == size) break;
+                    if (matrice[j][k] == 0) matrice[j+i][k] = 1;
+                    else           matrice[j+i][k] = 0;
+                }
+                i = i+j;
+            }
+        }
+        
+        for (i = 0; i < size; i++) {
+            //System.out.println("Estoy aqui");
+            for (j = 0; j < size; j++)
+                System.out.print(matrice[i][j]);
+            System.out.println();
+        }
     }
 }
+

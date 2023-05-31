@@ -52,7 +52,7 @@
  ***************************************************************/
 
 public class DiscreteDistribution {
-    public static void main( String[] argv ){
+    public static void main(String[] argv) {
         
         int trials = Integer.parseInt(argv[0]);
         int[] arr = new int[argv.length];
@@ -63,16 +63,15 @@ public class DiscreteDistribution {
         }
         
         for (int i = 0; i < trials; i++) {
-            int r = (int)( Math.random() * arr[arr.length - 1]);
+            int r = (int) (Math.random() * arr[arr.length - 1]);
             // TODO : Sería una buena idea utilizar la búsqueda binaria aquí
             for (int j = 1; j < arr.length; j++) {
-                if ( (r >= arr[j - 1]) && (r < arr[j]) ) {
+                if ((r >= arr[j - 1]) && (r < arr[j])) {
                     System.out.print( j + " ");
                     break;
                 }
             }
         }
-        System.out.println();
-        
+        System.out.println();  
     }
 }

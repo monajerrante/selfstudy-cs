@@ -35,27 +35,53 @@
  ***************************************************************/
 
 public class Birthday {
-    public static void main( String[] argv ){
-        int size = Integer.parseint(argv[0]);
-        int[] str = new int[size*2;
-        while ( str.length < size ) {
-            for (int i = 0; i < str.length; i++) {
-                if (str[i] == ) {
-                    str +=  
-        }
-        ver = gen_str(size, '0')
-        for i in ver:
-            print(gen_str(size, i))
+    public static void main(String[] argv) {
+        // tome dos argumentos de línea de comandos 
+        int n = Integer.parseInt(argv[0]);
+        int trails = Integer.parseInt(argv[1]);
         
-        def gen_str(n, res):
-          #res = '0'
-          while len(res) < n:
-            for i in res:
-              if i == '0':
-                res += '1'
-              elif i == '1':
-                res += '0'
-          return res[:n]
+        // declaración y definición de variables
+        double goodluck = 0.0;     // el número de coincidencias
+                               // de todos los cumpleaños
+        int good = 0;          // el número de coincidencias
+                               // de cumpleaños en un intento
+        
+        boolean[] birthdays = new boolean[n]; // Si, matriz de cumpleaños
+        double fraction = 0;   // el fracción
+        int peoples = 1;       // estoy empezando con una persona
+        int birthday = 0;      // el cumpleaño
+        
+        // bueno, vamos, hasta que la fracción sea menor a 0.5
+        while (fraction < 0.5) {
+            // ejecuta $trials intentos
+			// (¿O hacer? ¿Cuál es la mejor manera de decir?)
+		    for (int i = 0; i < trails; i++) {
+				// restablecer cumpleaños
+			    for (int a = 0; a < birthdays.length; a++) {
+				    birthdays[a] = false;
+				}
+				
+				for (int j = 1; j <= peoples; j++) {
+				    birthday = (int) (Math.random() * n);
+				    
+				    if (birthdays[birthday]) { 
+						good++;
+						break;
+					} else {
+						birthdays[birthday] = true;
+					}
+				}
+			} // // Entonces, completó la ejecución
+			// Veamos qué pasa
+			goodluck += good;
+			
+			fraction = goodluck/trails;
+			
+			System.out.println(peoples + " " + good + " " + fraction + " ");
+			good = 0;
+			peoples++;
+			
+		}
     }
 }
 
